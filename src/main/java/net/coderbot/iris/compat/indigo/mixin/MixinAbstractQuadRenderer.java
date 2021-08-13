@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 /**
  * Small tweak to Indigo to make it obey our separateAo setting.
  */
-@Mixin(targets = "net/fabricmc/fabric/impl/client/indigo/renderer/render/AbstractQuadRenderer", remap = false)
+@Mixin(targets = "net/fabricmc/fabric/impl/client/indigo/renderer/render/AbstractQuadRenderer")
 @Pseudo
 public class MixinAbstractQuadRenderer {
 	@Redirect(method = {"tesselateSmooth", "tesselateSmoothEmissive"},
