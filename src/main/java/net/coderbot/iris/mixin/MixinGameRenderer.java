@@ -72,6 +72,10 @@ public class MixinGameRenderer {
 	private static void iris$overridePositionShader(CallbackInfoReturnable<Shader> cir) {
 		if (isPhase(WorldRenderingPhase.SKY)) {
 			override(CoreWorldRenderingPipeline::getSkyBasic, cir);
+		} else if (ShadowRenderer.ACTIVE) {
+			// TODO: shadowBasic
+		} else if (isRenderingWorld()) {
+			override(CoreWorldRenderingPipeline::getBasic, cir);
 		}
 	}
 
@@ -79,6 +83,10 @@ public class MixinGameRenderer {
 	private static void iris$overridePositionColorShader(CallbackInfoReturnable<Shader> cir) {
 		if (isPhase(WorldRenderingPhase.SKY)) {
 			override(CoreWorldRenderingPipeline::getSkyBasicColor, cir);
+		} else if (ShadowRenderer.ACTIVE) {
+			// TODO: shadowBasicColor
+		} else if (isRenderingWorld()) {
+			override(CoreWorldRenderingPipeline::getBasicColor, cir);
 		}
 	}
 
@@ -288,7 +296,18 @@ public class MixinGameRenderer {
 
 	@Inject(method = "getRenderTypeBeaconBeamShader", at = @At("HEAD"), cancellable = true)
 	private static void iris$overrideBeaconBeamShader(CallbackInfoReturnable<Shader> cir) {
-			override(CoreWorldRenderingPipeline::getBeacon, cir);
+		override(CoreWorldRenderingPipeline::getBeacon, cir);
+	}
+
+	@Inject(method = {
+			"getRenderTypeLinesShader()Lnet/minecraft/client/render/Shader;"
+	}, at = @At("HEAD"), cancellable = true)
+	private static void iris$overrideLinesShader(CallbackInfoReturnable<Shader> cir) {
+		if (ShadowRenderer.ACTIVE) {
+			override(CoreWorldRenderingPipeline::getShadowLines, cir);
+		} else if (isRenderingWorld()) {
+			override(CoreWorldRenderingPipeline::getLines, cir);
+		}
 	}
 
 	private static boolean isPhase(WorldRenderingPhase phase) {

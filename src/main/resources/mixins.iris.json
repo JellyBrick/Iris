@@ -10,6 +10,7 @@
     "MixinGameRenderer",
     "MixinGlShader",
     "MixinGlStateManager",
+    "MixinGlUniform",
     "MixinHeldItemRenderer",
     "MixinImmediateVertexConsumerProvider",
     "MixinLivingEntityRenderer",
