@@ -10,8 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GlStateManager.class)
 public class MixinGlStateManager {
-	//TODO: (1.17) Fix fog uniforms
-	/*
 	private static Runnable fogToggleListener;
 	private static Runnable fogModeListener;
 	private static Runnable fogDensityListener;
@@ -41,5 +39,5 @@ public class MixinGlStateManager {
 		StateUpdateNotifiers.fogToggleNotifier = listener -> fogToggleListener = listener;
 		StateUpdateNotifiers.fogModeNotifier = listener -> fogModeListener = listener;
 		StateUpdateNotifiers.fogDensityNotifier = listener -> fogDensityListener = listener;
-	}*/
+	}
 }
