@@ -46,10 +46,11 @@ public abstract class MixinDebugHud {
 		messages.add("");
 		messages.add("[Iris] Version: " + Iris.getFormattedVersion());
 		messages.add("");
+
 		if (Iris.getIrisConfig().areShadersEnabled()) {
 			messages.add("[Iris] Shaderpack: " + Iris.getCurrentPackName());
 		} else {
-			messages.add("[Iris] Shaders Disabled");
+			messages.add("[Iris] Shaders are disabled");
 		}
 
 		messages.add(3, "Direct Buffers: +" + humanReadableByteCountBin(directPool.getMemoryUsed()));

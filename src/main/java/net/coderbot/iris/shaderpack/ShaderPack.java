@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -42,6 +43,9 @@ public class ShaderPack {
 	private final ShaderProperties shaderProperties;
 
 	public ShaderPack(Path root) throws IOException {
+		// A null path is not allowed.
+		Objects.requireNonNull(root);
+
 		this.shaderProperties = loadProperties(root, "shaders.properties")
 			.map(ShaderProperties::new)
 			.orElseGet(ShaderProperties::empty);
@@ -94,6 +98,8 @@ public class ShaderPack {
 		if (shaderPath == null) return Optional.empty();
 
 		try {
+			// NB: shaders.properties is specified to be encoded with ISO-8859-1 by OptiFine,
+			//     so we don't need to do the UTF-8 workaround here.
 			properties.load(Files.newInputStream(shaderPath.resolve(name)));
 		} catch (IOException e) {
 			Iris.logger.debug("An " + name + " file was not found in the current shaderpack");
@@ -168,6 +174,8 @@ public class ShaderPack {
 			Properties properties = new Properties();
 
 			try {
+				// Use InputStreamReader to avoid the default charset of ISO-8859-1.
+				// This is needed since shader language files are specified to be in UTF-8.
 				properties.load(new InputStreamReader(Files.newInputStream(path), StandardCharsets.UTF_8));
 			} catch (IOException e) {
 				Iris.logger.error("Error while parsing languages for shaderpacks! Expected File Path: {}", path);

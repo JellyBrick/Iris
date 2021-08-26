@@ -17,23 +17,15 @@ import java.util.function.IntSupplier;
 public class ProgramBuilder extends ProgramUniforms.Builder implements SamplerHolder {
 	private static final ShaderConstants EMPTY_CONSTANTS = ShaderConstants.builder().build();
 
-	public static final ShaderConstants MACRO_CONSTANTS;
-
-	static {
-		try {
-			MACRO_CONSTANTS = ShaderConstants.builder()
-					.define(StandardMacros.getOsString())
-					.define("MC_VERSION", StandardMacros.getMcVersion())
-					.define("MC_GL_VERSION", StandardMacros.getGlVersion(GL20C.GL_VERSION))
-					.define("MC_GLSL_VERSION", StandardMacros.getGlVersion(GL20C.GL_SHADING_LANGUAGE_VERSION))
-					.define(StandardMacros.getRenderer())
-					.define(StandardMacros.getVendor())
-					.defineAll(StandardMacros.getGlExtensions())
-					.build();
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to initialize StandardMacros!", e);
-		}
-	}
+	public static final ShaderConstants MACRO_CONSTANTS = ShaderConstants.builder()
+		.define(StandardMacros.getOsString())
+		.define("MC_VERSION", StandardMacros.getMcVersion())
+		.define("MC_GL_VERSION", StandardMacros.getGlVersion(GL20C.GL_VERSION))
+		.define("MC_GLSL_VERSION", StandardMacros.getGlVersion(GL20C.GL_SHADING_LANGUAGE_VERSION))
+		.define(StandardMacros.getRenderer())
+		.define(StandardMacros.getVendor())
+		.defineAll(StandardMacros.getGlExtensions())
+		.build();
 
 	private final int program;
 	private ProgramSamplers.Builder samplers;

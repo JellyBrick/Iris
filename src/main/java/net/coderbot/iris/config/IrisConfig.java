@@ -208,6 +208,7 @@ public class IrisConfig {
 		}
 
 		Properties properties = new Properties();
+		// NB: This uses ISO-8859-1 with unicode escapes as the encoding
 		properties.load(Files.newInputStream(propertiesPath));
 
 		this.read(properties);
@@ -220,6 +221,7 @@ public class IrisConfig {
 	 */
 	public void save() throws IOException {
 		Properties properties = this.write();
+		// NB: This uses ISO-8859-1 with unicode escapes as the encoding
 		properties.store(Files.newOutputStream(propertiesPath), COMMENT);
 	}
 

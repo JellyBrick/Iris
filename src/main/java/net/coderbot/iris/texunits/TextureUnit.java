@@ -4,9 +4,8 @@ import org.lwjgl.opengl.GL15;
 
 public enum TextureUnit {
 	TERRAIN(0),
-	LIGHTMAP(2),
-	// TODO: Relocate this to a different texture unit, this is used by depthtex0...
-	OVERLAY(1);
+	LIGHTMAP(1),
+	OVERLAY(2);
 
 	private final int samplerId;
 	private final int unitId;
