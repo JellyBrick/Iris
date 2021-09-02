@@ -17,15 +17,15 @@
     "license": "LGPL-3.0-only",
     "icon": "assets/iris/iris-logo.png",
 
-    "environment": "client",
-    "entrypoints": {
-        "client": [
-            "net.coderbot.iris.Iris"
-        ],
-        "modmenu": [
-            "net.coderbot.iris.config.IrisModMenu"
-        ]
-    },
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.coderbot.iris.Iris"
+    ],
+    "modmenu": [
+      "net.coderbot.iris.compat.modmenu.ModMenuIntegration"
+    ]
+  },
 
   "mixins": [
     "mixins.iris.json",
