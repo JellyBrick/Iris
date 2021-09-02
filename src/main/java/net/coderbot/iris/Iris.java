@@ -70,7 +70,7 @@ public class Iris implements ClientModInitializer {
 
 				// A lot of people are reporting visual bugs with Iris + Sodium. This makes it so that if we don't have
 				// the right fork of Sodium, it will just crash.
-				if (!versionString.startsWith("0.3.2+IRIS2")) {
+				if (!versionString.startsWith(SODIUM_VERSION)) {
 					sodiumInvalid = true;
 				}
 			}
